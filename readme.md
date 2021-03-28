@@ -2,6 +2,8 @@
 
 This program scrapes the unconfirmed transactions list for a minute at a time, the largest transaction of that minute is then sent to a mongoDB database. The database is filled with unique data, there are no duplicates that are allowed into it. This data can then later be used for analysis.
 
+[Dockerhub](https://hub.docker.com/r/frederic2707/databases-advanced)
+
 ## Table of contents
 **[Requirements](#Requirements)**<br>
 **[Instalation](#Instalation)**<br>
@@ -48,7 +50,7 @@ run command `python3 ./main.py`
 
 docker
 
-`docker run <tagname>`
+`docker run frederic2707/databases-advanced`
 
 docker-compose
 
