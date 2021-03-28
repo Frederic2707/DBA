@@ -23,15 +23,15 @@ class scrapeThread(threading.Thread):
     def run(self):
         while active: 
             time.sleep(1)
-            tijdelelijkeVar=(scrape())
-            if mongo.check_double(tijdelelijkeVar["hash"]) == False:
-                #redishelper.redisSave(tijdelelijkeVar, "placeholder")
-                if redishelper.keyCheck("placeholder")==False :
-                    redishelper.redisSave(tijdelelijkeVar,"placeholder")
-                else:
-                    last = redishelper.redisRetrieve("placeholder")
-                    if tijdelelijkeVar["priceBTC"]>last["priceBTC"]:
+            try:                
+                tijdelelijkeVar=(scrape())
+                if mongo.check_double(tijdelelijkeVar["hash"]) == False:
+                    if redishelper.keyCheck("placeholder")==False :
                         redishelper.redisSave(tijdelelijkeVar,"placeholder")
-                        print("valuechange")
-                    print(tijdelelijkeVar)
-    
+                    else:
+                        last = redishelper.redisRetrieve("placeholder")
+                        if tijdelelijkeVar["priceBTC"]>last["priceBTC"]:
+                            redishelper.redisSave(tijdelelijkeVar,"placeholder")
+                            print(tijdelelijkeVar)
+            except Exception:    
+                print("An exception has occured")
