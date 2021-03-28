@@ -1,0 +1,28 @@
+version: "3.2"
+
+services: 
+  mongodb:
+    image: mongo
+    ports: 
+      - 27017:27017
+    environment: 
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+  
+
+  scraper:
+    build: .
+    environment: 
+      DATABASE_HOST: db
+      REDIS_HOST: rd
+    links:
+      - mongodb:db
+      - redis:rd
+    volumes: 
+      - ./logs:/usr/src/app/logs
+
+  redis:
+    image: redis
+    ports: 
+      - 6379:6379
+

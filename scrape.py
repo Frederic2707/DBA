@@ -19,5 +19,9 @@ def scrape():
         if price < prijs:
             price = prijs
             big=i
-
-    return (varia[big].contents[0].text[4:])
+    content = varia[big].contents
+    data = {"hash": content[0].text[4:],
+        "time": content[1].text[4:],
+        "amountBTC":float(content[2].text.split(" ")[1][5:]),
+        "priceBTC": price}
+    return data

@@ -1,2 +1,4 @@
 pymongo
 bs4
+requests
+redis

@@ -1,11 +1,7 @@
-from scrape import scrape
-import time
+import threadingdata
 
+thread1 = threadingdata.redisThread()
+thread2 = threadingdata.scrapeThread()
 
-hashlist=[]
-while True:
-    tijdelelijkeVar=(scrape())
-    if tijdelelijkeVar not in hashlist:
-        hashlist.append(tijdelelijkeVar)
-        print(tijdelelijkeVar)
-    time.sleep(60)
+thread1.start()
+thread2.start()
